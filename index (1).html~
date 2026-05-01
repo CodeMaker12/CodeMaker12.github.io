@@ -1,0 +1,40 @@
+<html>
+
+<HEAD>
+<TITLE> Das ist der Titel der Website </TITLE>
+</HEAD>
+
+<body>
+<h1> Themenbereiche </h1>
+
+<P> Auf dieser Website werden unterschidlich Themenbereiche, mit denen ich mich beruflich und privat befasse erklärt</P>
+
+<A href='./Category_Electronics/index.html'> <FONT size='10'> Elektro Technik </FONT></A>
+<BR>
+<A href='./Category_Electronics/index.html'> <IMG src='Elektronik Reiter.png' styles = widht='100%'; height='auto' > </A>
+<BR>
+
+<!--  
+//<h2> Elektrotechnik </h2>
+<P> Hier beschreibe ich wie man bestimmte Schaltungen auslegt, aufbaut und testet. </P>
+<P> Falls möglich werden hierzu Formeln verwendet und es werden LTSpice-Dateien zum Herunterladen bereitgestellt, sodass jeder die Zusammenhänge selber nachvollziehen kann </P>
+
+<h3> Transistorschaltungen </h3> 
+<P> Der Bipolartransistor kann in Verstärkerschaltungen verwendet werden. </P>
+<P> Je nachdem wie der Bipolartransistor mit passiven Bauteilen verschaltet wird ergeben sich unterschiedliche Vestärkerschaltungen. </P>
+
+<h3> Emitterschaltung </h3> 
+<P> Bei der Emitterschaltung hat das Eingangs- und das Aussgangssignal die negative Klemme am Emitter </P>
+<IMG src = "Emitterschaltung.png">
+
+<h3> Kollektorschaltung </h3> 
+<P> Bei der Kollektorschaltung liegt der Bezugspunkt am Kollektor. </P>
+<IMG width="400" height=400 src = "Kollektorschaltung.png">
+-->
+
+
+</body>
+
+
+
+</html>
