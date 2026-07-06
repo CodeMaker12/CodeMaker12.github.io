@@ -1,0 +1,484 @@
+<html>
+
+<HEAD>
+<TITLE> Das ist der Titel der Website </TITLE>
+</HEAD>
+
+<body>
+
+<h1> Informatik </h1>
+<P> Hier beschreibe ich wie man Konzepte in Unity umsetzt. </P>
+<P> Falls möglich werden die Unityprojekte als .zip-Datei zum Herunterladen bereitgestellt, sodass jeder die Zusammenhänge selber nachvollziehen kann. </P>
+
+<h2> Multiplayer </h2> 
+
+<h3> 1. Vorbereitung des Projekts </h3> 
+<P>
+Um dieser Aleitung folgen zu können muss man einen Unity Account besitzen. Man sollte die Anwendung Unity-Hub und eine Unity-Version heruntergeladen haben.<br> 
+Diese Anleitung wurde auf Grundlage der 'Unity-Version 6000.3.2f1' geschrieben. Bei älteren und besonders bei neueren Unity-Version sollte es jedoch ebenfalls funktionieren.
+</P>
+<h4> 1.1 Erstellen eines neuen Unity Projekts (2D)</h4>
+<P>
+Starte die Anwendung Unity-Hub.<br> 
+Der Reiter 'Projekts' wird ausgewählt.
+Rechts oben wird auf 'New Project' geklickt. 
+Unity stellt unterschiedliche Templates (Vorlagen) zur Verfügung. Je nach Template sind unterschiedliche Packete im Projekt von beginn an enthalten.
+Es gibt Templates explizit für Multiplayer. Da die vorhandenen Templates von der verwendeten Unity Version abhängen, wird keins dieser Templates verwendet.
+Die Templates 'Universal 2D' und 'Universal 3D' sind bei jeder Unity-Version vorhandet. Alle Packete können später manuell hinzugefügt werden.
+Für diese Anleitung wird das Template 'Universal 2D' verwendet. Bei den Konfigurations-Einstellungen (Unity Organization, Project Name, Locaation) spielt es keine Rolle was eingetragen wird.
+Mit dem Knopf 'Create Project' wir das Projekt erstellt.
+</P>
+
+<IMG src = "1.1 Unity_Projekt_Erstellen.png" style='width:100%; height:auto'>
+<br>
+<br>
+<HR width="80%"; size="4"; color="black">
+
+<h4> 1.2 Hinzufügen des Packets 'NetCode for Gameobjects'</h4> 
+<P> 
+Gehe zu <b>Windows > PackageManagement > Package Manager</b> und klicke auf Package Manager.<br>
+Im Package Manager wird Unity Registery ausgewählt.<br>
+In der Suchleiste wird nach Nectcode for Gameobjects gesucht.<br>
+Klicke auf dieses Package und anschließend auf den Knopf Install.<br>
+Wenn die Installation abgeschlossen ist, kann der Package Manager geschlossen werden.<br>
+Im Projekt Abschnitt kann überprüft werden ob das Packet Netcode for Gameobjects installiert worden ist.<br>
+</P>
+
+<IMG src = "1.2 PackageManager.png" style='width:100%; height:auto'>
+<br>
+<br>
+<HR width="80%"; size="4"; color="black">
+
+<h3> 2. Vorbereitung der Scene </h3>
+
+<h4> 2.1 Hinzufügen des NetworkManagers</h4>
+<P> 
+In der Szene wird ein leeres <b>GameObject</b> hinzugefügt. Rechtsklick im Bereich der 'Hierarchy' und auf 'Create Empty' klicken.<br>
+Das erstellte GameObject wird 'Network Manager' genannt. Rechtklick auf des Gameobject in der Hierarchy, dann 'Rename' klicken und 'Network Manager' eingeben. <br>
+Dem <b>GameObject</b> wird eine <b>NetworkManager-Komponente</b> hinzugefügt. Das GameObject 'Network Manager' muss ausgewählt sein, das erkennt man an der blauen Markierung. <br>
+Man sieht im Inspector rechts welche Komponenten das Gameobject beinhaltet. Mit dem Knopf 'Add Component' kann eine 'Network Manager'-Komponente dem ausgewählten GameObject hinzugefügt werden. <br>
+Wenn die 'Network Manager'-Komponente dem Gamobject hinzugefügt worden ist, sieht man diese im Inspector.
+</P>
+
+<IMG src = "2.1 Hinzufügen des NetworkManagers.png" style='width:100%; height:auto'>
+<br>
+<br>
+<HR width="80%"; size="4"; color="black"> 
+
+<h4> 2.2 Hinzufügen der 'Unity Transport'-Komponente </h4>
+<P> 
+Die <b>NetworkManager-Komponente</b> des <b>NetworkManager-GameObjects</b> ist ein Script. Dieses Skript beinhaltet Variablen.<br>
+Die Variable <b>Network-Transport</b> wird auf <b>UnityTransport</b> gestellt.<br>
+In der 'Unity Transport'-Komponente werden die vorkonfigurierten Werte vorerst nicht geändert.
+</P>
+<IMG src = "2.2 Hinzufügen des UnityTransports.png" style='width:60%; height:auto; display:block; margin:auto'>
+<br>
+<br>
+<HR width="80%"; size="4"; color="black"> 
+
+<h4> 2.3 Estellen des PlayerPrefabs </h4>
+<P> 
+In der Szene wird ein leeres <b>GameObject</b> hinzugefügt. In der Hierarchy rechtslicken und 'Create Empty' auswählen. Dieses wird PlayerPrefab genannt.<br>
+Dem <b>GameObject</b> wird eine <b>'Network Object'-Komponente</b> hinzugefügt.<br>
+Dem <b>GameObject</b> wird zudem eine <b>'Network Transform'-Komponente</b> hinzugefügt.<br>
+Im GameObject namens PlayerPrefab gibt es nun eine <b>'Transform'-Komponente</b>, eine <b>'Network Object'-Komponente</b> und eine <b>'Network Transform'-Komponente</b>. 
+</P>
+<IMG src = "2.3 Hinzufügen des PlayerPrefabs.png" style='width:100%; height:auto'>
+<br>
+<P> 
+Dem <b>GameObject</b> wird eine <b>'SpriteRenderer'-Komponente</b> hinzugefügt.<br>
+</P>
+<IMG src = "2.3 Hinzufügen des Sprite-Renderers.png" style='width:100%; height:auto'>
+<br>
+<br>
+<HR width="80%"; size="4"; color="black"> 
+
+<h4> 2.4 Estellen des Skripts-Ordners </h4>
+<P> 
+Im Abschnitt Projekt wird in <b>Assets</b> ein neuer Ordner angelegt.<br>
+In Assets Rechtsklicken>Create>Folder. Der Ordner wird Scripts genannt.<br> 
+</P>
+<IMG src = "2.4 Erstellen des Script-Ordners.png" style='width:100%; height:auto'>
+<br>
+<br>
+<HR width="80%"; size="4"; color="black"> 
+
+<h4> 2.5 Erstellen des PlayerActionScripts </h4> 
+<p>
+Der Ordner Scripts wird mit Doppel-Klick geöffnet.<br>
+Rechtsklick in den leeren Ordner. Ein Script wird hinzugefügt, <b>Create>Folder>MonoBehaviour-Script</b>. Dieses Script wird PlayerAction genannt.<br>
+Das erstellte Script wird mit doppelklicken geöffnet.<br>
+Wichtig: Der Name des Skripts muss in der Programmierumgebung der selbe sein wie im Scripts-Ordner.<br>
+</P>
+<IMG src = "2.5 Erstellen des PlayerAction Scripts.png" style='width:100%; height:auto'>
+<br>
+<br>
+<HR width="80%"; size="4"; color="black"> 
+
+
+
+<h4> 2.6 Schreiben des PlayerActionScripts </h4> 
+<P>
+Des PlayerAction-Script kann von hier in die Programierumgebung kopiert werden.<br>
+Der Aufbau des Skripts PlayerActions ist Folgender:<br>
+<div style="display:flex; gap:20px;">
+
+  <div style="
+    width:50%;
+    border:2px solid black;
+    padding:10px;
+  ">
+<font color="#569CD6">using</font> <font color="#4EC9B0">UnityEngine</font>;<br>
+<font color="#569CD6">using</font> <font color="#4EC9B0">Unity.Netcode</font>;<br>
+<br>
+<font color="#569CD6">public class</font> <font color="#4EC9B0">PlayerAction</font> : <font color="#4EC9B0">NetworkBehaviour</font><br>
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#569CD6">public override void</font> <font color="#DCDCAA">OnNetworkSpawn</font>(){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#569CD6">if</font> (OwnerClientId == <font color="#B5CEA8">0</font>){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GetComponent&lt;<font color="#4EC9B0">SpriteRenderer</font>&gt;().color = <font color="#4EC9B0">Color</font>.red;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#569CD6">else</font>{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GetComponent&lt;<font color="#4EC9B0">SpriteRenderer</font>&gt;().color = <font color="#4EC9B0">Color</font>.blue;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#569CD6">void</font> <font color="#DCDCAA">Update</font>(){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#569CD6">if</font> (!IsOwner){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#569CD6">return</font>;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#569CD6">if</font> (Input.GetKeyDown(<font color="#4EC9B0">KeyCode</font>.Space)){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#569CD6">if</font> (IsHost){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MoveAndGrow();}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#569CD6">else if</font> (IsClient){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MoveAndGrowServerRpc();}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[<font color="#4EC9B0">ServerRpc</font>]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#569CD6">void</font> <font color="#DCDCAA">MoveAndGrowServerRpc</font>(){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MoveAndGrow();}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#569CD6">void</font> <font color="#DCDCAA">MoveAndGrow</font>(){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transform.position = <font color="#569CD6">new</font> <font color="#4EC9B0">Vector2</font>(Random.Range(<font color="#B5CEA8">-5f</font>, <font color="#B5CEA8">5f</font>),Random.Range(<font color="#B5CEA8">-5f</font>, <font color="#B5CEA8">5f</font>));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transform.localScale += <font color="#4EC9B0">Vector3</font>.one * <font color="#B5CEA8">0.1f</font>;}<br>
+}<br>
+  </div>
+
+  <div style="
+    width:50%;
+    border:2px solid black;
+    padding:10px;
+  ">
+Erklärung des Skripts:
+1. Das Skript soll nicht von MonoBehaviour erben, sondern von NetworkBehaviour:<br>
+public class PlayerAction : MonoBehaviour --> public class PlayerAction : NetworkBehaviour<br><br>
+2. Die Funktion OnNetworkSpawn() wird auf allen Geräten die mit dem Netzwerk verbunden sind für das jeweilige NetworkObject ausgeführt.<br>
+Jede Instanz des Spiels auf egal welchem Gerät hat die Variable OwnerClientId.<br>
+Der Host hat OwnerClientId=0 ; Der 1. Client hat OwnerClientId=1 ; Der 2. Client hat OwnerClientId=2 ; ... <br>
+In jeder Instanz des Spieles wird das Host-PlayerPrefab also als Roter-Kries angezeigt und die Client-PlayerPrefabs als blaue Kriese. <br>
+3. Die Funktion 'MoveAndGrow' verändert die Position des GameObjects und vergrößert es.<br>
+4. Update() wird in jeder Instanz ausgeführt. Damit der Host oder ein Client nur das eingene PlayerPrefab-GameObject kontrolliert wird abgefragt ob es der Owner ist.<br>
+Wenn die Instanz nicht der Owner ist, wird die Update funktion verlassen. <br>
+Ist die Instanz der Owner des GameObjects und wird in dieser Instanz die Leertaste gedrückt, soll die Funktion MoveAndGrow ausgeführt werden.<br>
+Die Instanz des Hosts ist der wahre Game-State. Dieser Wahre Gamestate der Hostinstanz wird auf allen Clients synchronisiert.<br>
+Der Host darf also MoveAndGrow ausführen und so die Position seines PlayerPrefabs direkt ändern und dieser geänderte Game-State der Host-Instanz wird auf allen Clients synchronisiert.<br><br>
+5. Die Instanz des Clients könnte auch direkt MoveAndGrow() ausführen und die Position ihres Playerprefabs in der Client-Instanz ändern. <br>
+Die Host-Instanz würde diese Änderung jedoch sofort mit dem Wahren Gamestate der Host-Instanz überschreiben.<br>
+Damit eine Änderung wirklich in den Wahren Game-State übergeht muss diese auf der Host-Instanz durchgeführt werden.<br>
+Hierzu wird eine ServerRPC (Remote Procedure Call) verwendet. Die Client-Instanz fragt mit MoveAndGrowServerRpc() beim Host/Server nach:<br>
+Kannst du für mein PlayerPrefab bitte den Inhalt dieser RPC ausführen? Auf der Host-Instanz wird dann der Inhalt der RPC für das entsprechnede Player-Prefab ausgeführt.<br>
+  </div>
+
+</div>
+<br>
+Das Skript PlayerAction wird nun dem GameObject PlayerPrefab hinzugefügt.<br>
+Dazu wird das Gameobject PlayerPrefab geöffnet, AddComponent>PlayerAction.<br>
+</p>
+<br>
+<br>
+<HR width="80%"; size="4"; color="black">
+
+<h4> 2.7 Erstellen des Prafab-Ordners </h4> 
+<P>
+Im Projekt Abschnitt wird in Assets ein Ordner namens Prefabs erstellt, Rechtsklick>Create>Folder. <br>
+Der Ordner wird Prefabs genannt. <br>
+Das GameObject PlayerPrefab wird aus der Scene in den Prefabs-Ordner gezogen.<br>
+Wenn das GameObject PlayerPrefab in der Szene und im Prefab-Ordner ein blaues Symbol hat, dann hat es funktioniert.<br>
+Das PlayerPrefab GameObject wird aus der Szene gelöscht.<br>
+</P>
+<IMG src = "2.7 Erstellen des PlayerPrefab Ordners.png" style='width:100%; height:auto'>
+<br>
+<P>
+Das PlayerPrefab GameObject wird aus der Szene gelöscht.<br>
+Das PlayerPrefab wird aus dem Prefab-Ordner in die Variable 'Default Player Prefab' des NetworkManger-Skripts des NetworkManager-GameObjects gezogen. <br>
+</P>
+<IMG src = "2.7 Erstellen des PlayerPrefab Ordners_2.png" style='width:100%; height:auto'>
+<br>
+<br>
+<HR width="80%"; size="4"; color="black"> 
+
+<h4> 2.8 Aktivieren des alten Input-Systems </h4> 
+<P>
+Die Funktion Input.GetKeyDown(KeyCode.Space) funktioniert im neuen, standardmäßig aktivem Input-System nicht. Das alte InputSystem wird deshalb aktiviert. <br>
+Dafür werden die Project-Settings geöffnet, Edit>Projekt Settings.<br>
+In den Projekt Settings wird der Abschnitt Player ausgewählt.<br>
+In der Suchleiste wird Active Input Handling aingegeben.<br>
+<b>Active Input Handling muss auf BOTH gestellt sein.</b>
+Nach dem Umstellen fordert Unity einen Restart. Dieser kann bestätigt werden.<br>
+</P>
+<IMG src = "2.7 Aktivieren des alten Input-Systms.png" style='width:100%; height:auto'>
+<br>
+<br>
+<HR width="80%"; size="4"; color="black">
+
+<h4> 2.9 Testen als Host </h4> 
+<P>
+Mit dem 'Play'-Knopf wird die Anwendung gestartet werden. <br>
+In der Hirarchie wird im Abschnitt 'DontDestroyOnLoad' das NetworkManager-Gameobject geöffnet.<br>
+Im Inspector wird im NetworkManager-Skript des NetworkManager-GameObjects auf den 'Start As Host'-Knopf gedrückt.<br>
+Um die Anwendung zu bedienen muss einmal in das Anwendungsfenster geklickt werden. Dann kann die Leertaste gedrückt werden um das PlayerPrefabs des Hosts zu beeinflussen.<br>
+Nach dem Test wird die Anwendung mit dem 'Stop'-Button gestoppt.<br>
+Dieses Video zeigt die oben ganannten Schritte:<br>
+</P>
+<video
+    muted
+    controls
+    style="display:block; width:80%; height:auto; margin:0 auto;">
+    <source src="LocalTestHost_Compressed.webm" type="video/webm">
+</video>
+<br>
+<br>
+<HR width="80%"; size="4"; color="black">
+
+<h4> 2.10 Testen als Host mit Clients </h4> 
+<P>
+Um ein Multiplayer-Spiel testen zu können müssen mehrere Instanzen des Spiels gleichzeitig laufen.<br>
+Das Packet 'Multiplayer Play Mode' wurde genau dafür entwickelt. Über den 'Package-Manger' wird das 'Multiplayer Play Mode'-Packet heruntergeladen.<br>
+Window > PackageManagement > Package Manager, suchen nach 'Multiplayer Play Mode', dieses Package installieren. Siehe Schritt 1.2 für Bildanleitung.<br>
+Wenn das 'Multiplayer Play Mode'-Package im Projektreiter unter Packages angezeigt wird, ist die Installation richtig durchgeführt worden.<br>
+</p>
+<IMG src = "2.10 Testen als Host mit Clients_1.png" style='width:100%; height:auto'>
+<br>
+<P>
+Als nächstes wird das 'Multiplayer-Play-Mode'-Panel geöffnet.<br>
+Dafür wird mit 'Windows > Multiplayer > Multiplayer Play Mode' das 'Multiplayer-Play-Mode'-Panel gestartet.<br>
+Durch das Setzen des Hackens bei 'Player 2' wird eine neue Instanz gestartet.<br>
+</p>
+<IMG src = "2.10 Testen als Host mit Clients_2.png" style='width:100%; height:auto'>
+<br>
+<P>
+In der 1. Instanz wird mit dem 'Play'-Knopf die Anwendung gestartet, dadurch startet sich automatisch eine zweite Instanz der gleichen Anwendung.<br> 
+Die beiden Instanzen sollten zum Testen, wie im unten gezeigten Bild, angeordnet werden:<br>
+</p>
+<IMG src = "2.10 Testen als Host mit Clients_3.png" style='width:100%; height:auto'>
+<br>
+<P>
+In der 2. Instanz wird die Hierarchy und der Inspector nicht angezeigt. Diese sollen jedoch angezeigt werden.<br> 
+Oben rechts in der zweiten Instanz wird deshalb auf Layout geckickt. Console , Game, Hierarchy und Inspector werden markiert. Danach wird auf Apply gedrückt. <br>
+</p>
+<IMG src = "2.10 Testen als Host mit Clients_4.png" style='width:100%; height:auto'>
+<br>
+<P>
+Alle gewünschten elemente werden nun angezeigt.<br>
+Die Anzeige sollte nun folgendermaßen aussehen:<br>
+</p>
+<IMG src = "2.10 Testen als Host mit Clients_5.png" style='width:100%; height:auto'>
+<br>
+<P>
+Das Video zeigt wie der Test durchgeführt wird.<br>
+Zuerst wird die 1. Instanz als Host gestartet. Dann wird die 2. Instanz als Client gestartet.<br>
+Das PlayerPrefab des Hosts ist rot. Das PlayerPrefab des Clients ist blau.<br>
+Durch Drücken der Leertaste in der jeweiligen Instanz kann das jeweilige PlayerPrefab gesteuert werden.<br>
+</p>
+<video
+    muted
+    controls
+    style="display:block; width:80%; height:auto; margin:0 auto;">
+    <source src="LocalTestHostAndClient_Compressed.webm" type="video/webm">
+</video>
+<br>
+<br>
+<HR width="80%"; size="4"; color="black">
+
+<h4> 2.11 Erstellen des MainCanvas </h4> 
+<P>
+Um als Host zu arbeiten oder sich als Client zu verbinden muss im Inspector auf <b>'Start Host'</b> oder <b>Start Client</b> geklickt werden.<br>
+Wenn das Spiel später als Anwendung existiert und nicht im Unity Editor ausgeführt wird, gibt es keinen Inspector und keinen <b>'Start Host'</b> oder <b>Start Client Knopf</b>.<br>
+Die Auswahl der Rolle im Netzwerk (Host oder Client) muss auf eine andere Weise durchgeführt werden.<br>
+Dazu wird der Scene ein Canvas hinzugefügt. Rechtsklick UI>Canvas. Wir nennen das GameObject MainCanvas.<br>
+Unter dem Canvas UserInterface fügen wir zwei Buttons ein. Rechtsklick, UI>Button-Text Mesh Pro.<br>
+Man wird dazu aufgefordert die <b>TMP Essentials</b> zu importieren. Dies wird getan. <br>
+Das GameObject des erste Buttons wird StartHostButton genannt.<br>
+Das GameObject des zweite Button wird StartClientButton genannt.<br>
+</P>
+
+<IMG src = "2.11 Erstellen des MainCanvas.png" style='width:100%; height:auto'>
+<br>
+<br>
+
+<P>
+In den GameObjects der Buttons gibt es ein GameObject, dass Text (TMP) heißt. Öffnet dieses Text (TMP)-GameObject sodas die Komponenten im Inspector angezeigt werden.<br>
+Die Anzeigebeschriftung der Buttons lässt sich über das Textfeld im Inspektor festlegen.<br>
+Die Anzeigebeschriftung der Buttons wird jeweils zu <b>Start Host</b> und zu <b>Start Client</b> festgelegt.<br>
+Anschließend werden die Buttons, wie im Bild unten gezeigt, angeordnet.<br>
+</P>
+
+
+<IMG src = "2.11 Erstellen des MainCanvas_2.png" style='width:100%; height:auto'>
+<br>
+<br>
+
+<p>
+Im GameObject MainCanvas wird mit 'UI > Input Field - TextMeshPro' ein <b>Input Field</b> erstellt.<br>
+Dieses InputField-GameObject wird <b>'IP_Address_InputField'</b> genannt.<br>
+In der Szene wird das <b>'IP_Address_InputField'</b> über dem 'Start Host'-Knopf positioniert.<br>
+Im InputField-GameObject befindet sich ein GameObject mit der Bezeichung <b>Placeholder</b>. Das Placeholder GameObject wird ausgewählt.<br>
+Im Inspector findet man ein Textfeld. In dieses Text-Feld wird 'Enter IP-Adress' eingegeben.<br>
+</p>
+
+<IMG src = "2.11 Erstellen des MainCanvas_3.png" style='width:100%; height:auto'>
+<br>
+<br>
+
+<p>
+Im GameObject MainCanvas wird mit 'UI > Input Field - TextMeshPro' ein weiters <b>Input Field</b> erstellt.<br>
+Dieses InputField-GameObject wird <b>'Port_InputField'</b> genannt.<br>
+In der Szene wird das <b>'IP_Address_InputField'</b> über dem 'Start Host'-Knopf und unter dem 'IP_Address_InputField' positioniert.<br>
+Im InputField-GameObject befindet sich ein GameObject mit der Bezeichung <b>Placeholder</b>. Das Placeholder GameObject wird ausgewählt.<br>
+Im Inspector findet man ein Textfeld. In dieses Text-Feld wird 'Enter Port' eingegeben.<br>
+</p>
+
+<IMG src = "2.11 Erstellen des MainCanvas_4.png" style='width:100%; height:auto'>
+<br>
+<br>
+<HR width="80%"; size="4"; color="black"> 
+
+<h4> 2.12 Erstellen des NetworkRoleSelect-Skripts </h4> 
+<P>
+Die Knopfe sind erstellt, jedoch haben sie keine Funktion. Die Betätigung der Knöpfe bewirkt nichts.<br>
+Im Script Ordner wird ein neues Skript erstellt. Rechtsklick, Create>Scripting>MonoBehaviour Script. Dieses Script wird ChooseNetworkRole genannt <br>
+</P>
+
+<IMG src = "2.12 Erstellen des NetworkRoleSelect Skripts.png" style='width:100%; height:auto'>
+
+<P>
+Das NetworkRoleSelect-Skripts beinhaltet folgendes Programm.<br>
+</P>
+
+<div style="display:flex; gap:20px;">
+
+  <div style="
+    width:50%;
+    border:2px solid black;
+    padding:10px;
+  ">
+<font color="#569CD6">using</font> <font color="#4EC9B0">Unity.Netcode</font>;<br>
+<font color="#569CD6">using</font> <font color="#4EC9B0">UnityEngine</font>;<br>
+<font color="#6A9955">//Add</font><br>
+<font color="#569CD6">using</font> <font color="#4EC9B0">Unity.Netcode.Transports.UTP</font>;<br>
+<br>
+<font color="#569CD6">public class</font> <font color="#4EC9B0">ChooseNetworkRole</font> : <font color="#4EC9B0">MonoBehaviour</font><br>
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#569CD6">public</font> <font color="#4EC9B0">NetworkManager</font> networkManager;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#6A9955">//Add this Variable</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#569CD6">public</font> <font color="#4EC9B0">TMPro.TMP_InputField</font> ipAddress_Field;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#569CD6">public</font> <font color="#4EC9B0">TMPro.TMP_InputField</font> port_Field;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#569CD6">void</font> <font color="#DCDCAA">Start</font>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;networkManager = GetComponent&lt;<font color="#4EC9B0">NetworkManager</font>&gt;();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#569CD6">if</font>(networkManager == <font color="#569CD6">null</font>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#4EC9B0">Debug</font>.Log(<font color="#CE9178">"No reference to NetworkManager"</font>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ipAddress_Field = <font color="#4EC9B0">GameObject</font>.Find(<font color="#CE9178">"IP_Address_InputField"</font>).GetComponent&lt;<font color="#4EC9B0">TMPro.TMP_InputField</font>&gt;();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;port_Field = <font color="#4EC9B0">GameObject</font>.Find(<font color="#CE9178">"Port_InputField"</font>).GetComponent&lt;<font color="#4EC9B0">TMPro.TMP_InputField</font>&gt;();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#569CD6">public void</font> <font color="#DCDCAA">RunAsHost</font>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#4EC9B0">Debug</font>.Log(<font color="#CE9178">"Tried to start Host"</font>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#4EC9B0">ushort</font>.TryParse(port_Field.text, <font color="#569CD6">out</font> <font color="#4EC9B0">ushort</font> port);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;networkManager.GetComponent&lt;<font color="#4EC9B0">UnityTransport</font>&gt;().SetConnectionData(ipAddress_Field.text, port);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;networkManager.StartHost();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DeactivateUserInterface();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#569CD6">public void</font> <font color="#DCDCAA">RunAsClient</font>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#4EC9B0">Debug</font>.Log(<font color="#CE9178">"Tried to start Client"</font>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#4EC9B0">ushort</font>.TryParse(port_Field.text, <font color="#569CD6">out</font> <font color="#4EC9B0">ushort</font> port);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;networkManager.GetComponent&lt;<font color="#4EC9B0">UnityTransport</font>&gt;().SetConnectionData(ipAddress_Field.text, port);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;networkManager.StartClient();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DeactivateUserInterface();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#569CD6">private void</font> <font color="#DCDCAA">DeactivateUserInterface</font>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#4EC9B0">GameObject</font>.Find(<font color="#CE9178">"MainCanvas"</font>).SetActive(<font color="#569CD6">false</font>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}<br>
+  </div>
+
+  <div style="
+    width:50%;
+    border:2px solid black;
+    padding:10px;
+  ">
+Erklärung des Skripts:
+1. :<br>
+
+  </div>
+
+</div>
+<br>
+
+<P>
+Das ChooseNetworkRole-Skript wird dem 'Network Manager'-Gameonject als Komponente hinzugefügt.<br>
+Das <b>'Start Host Button'</b>-Gameobject besitzt die Komponente Button. Dieser Komponente wird eine OnClick()-Funktion hinzugefügt.<br>
+</P>
+
+<IMG src = "2.12 Erstellen des NetworkRoleSelect Skripts_2.png" style='width:100%; height:auto'>
+<br>
+<P>
+Der OnClick()-Funktion des wird das NetworkManager-GameObjectls Komponente zugeordnet.<br>
+Beim 'Start Host Button' wird die Funktion auf ChooseNotworkRole>RunAsHost() gestellt.<br>
+Beim 'Start Client Button' wird die Funktion auf ChooseNotworkRole>RunAsClient() gestellt.<br>
+</P>
+
+<IMG src = "2.12 Erstellen des NetworkRoleSelect Skripts_3.png" style='width:100%; height:auto'>
+<br>
+<br>
+<HR width="80%"; size="4"; color="black"> 
+<br>
+<br>
+
+
+<h4> 2.13 Testen des MainCanvas </h4> 
+<P>
+Wie beim Schritt <b>'2.10 Testen als Host mit Clients'</b> werden 2 Instanzed des Spiels mit dem 'Unity Play Mode' gestartet.<br>
+In der Instanz die als Host laufen soll ist folgendes durchgeführt:<br>
+Enter IP-Adress >>> 127.0.0.XXX   [XXX = beliebeige Zahn zwischen 1 und 254]<br>
+Enter Port >>> YYYY   [YYYYY = beliebeige Zahn zwischen 1024 und 65535]<br>
+</P>
+
+<video
+    muted
+    controls
+    style="display:block; width:80%; height:auto; margin:0 auto;">
+    <source src="MainCanvasTest_Compressed.webm" type="video/webm">
+</video>
+
+<a href="Build.zip" download>Download My Game</a>
+
+<br>
+<br>
+
+----------------------  Below is Work In Progress  ----------------------
+
+
+
+
+</body>
+
+</html>
