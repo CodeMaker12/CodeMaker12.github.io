@@ -224,7 +224,7 @@ In der Suchleiste wird Active Input Handling aingegeben.<br>
 <b>Active Input Handling muss auf BOTH gestellt sein.</b>
 Nach dem Umstellen fordert Unity einen Restart. Dieser kann bestätigt werden.<br>
 </P>
-<IMG src = "2.7 Aktivieren des alten Input-Systms.png" style='width:100%; height:auto'>
+<IMG src = "2.7 Aktivieren des alten Input-Systms.png" style='width:60%; height:auto; display:block; margin:auto'>
 <br>
 <br>
 <HR width="80%"; size="4"; color="black">
@@ -457,9 +457,16 @@ Beim 'Start Client Button' wird die Funktion auf ChooseNotworkRole>RunAsClient()
 <h4> 2.13 Testen des MainCanvas </h4> 
 <P>
 Wie beim Schritt <b>'2.10 Testen als Host mit Clients'</b> werden 2 Instanzed des Spiels mit dem 'Unity Play Mode' gestartet.<br>
+
 In der Instanz die als Host laufen soll ist folgendes durchgeführt:<br>
 Enter IP-Adress >>> 127.0.0.XXX   [XXX = beliebeige Zahn zwischen 1 und 254]<br>
 Enter Port >>> YYYY   [YYYYY = beliebeige Zahn zwischen 1024 und 65535]<br>
+Drücken des <b>'Start Host'</b>-Knopfs.
+
+In der Instanz die als Client laufen soll ist folgendes durchgeführt:<br>
+Enter IP-Adress >>> 127.0.0.XXX   [XXX = wie beim Host]<br>
+Enter Port >>> YYYY   [YYYYY = wie beim Host]<br>
+Drücken des <b>'Start Client'</b>-Knopfs.
 </P>
 
 <video
@@ -472,10 +479,73 @@ Enter Port >>> YYYY   [YYYYY = beliebeige Zahn zwischen 1024 und 65535]<br>
 <a href="Build.zip" download>Download My Game</a>
 
 <br>
+<HR width="80%"; size="4"; color="black"> 
+<br>
 <br>
 
+
+
 ----------------------  Below is Work In Progress  ----------------------
-git config --global user.name "CodeMaker12" git config --global user.email "feak95@gmx.de"
+
+<h3> 3. Builden des Spiels </h3>
+
+<P> 
+Im <b>'Network Manager'</b>-GameObject wird in der <b>'Unity Transport'</b>-Komponente der Hacken bei <b>'Enalbe Remote Connection'</b> aktiviert.<br>
+Das 'Build Profiles'-Fenster wird geöffnet. File > Build Profiles.<br>
+Im 'Build Profiles'-Fenster wird auf Build geklickt.<br>
+</P>
+
+<IMG src = "3. Erstellen des Builds.png" style='width:100%; height:auto'>
+<br>
+
+<P> 
+Es öffnet sich der Projekt-Ordner und es muss ein Ordner ausgewählt werden, in dem die Build-Datein gespeichert werden.<br>
+Es wird dashalb ein neuer Ordner erstellt und dieser wird 'Builds' genannt.<br>
+Der erstellte Builds-Ornder wird ausgewählt und mit dem <b>'Ordner auswählen'</b>-Knopf wird der Build-Prozess gestartet.
+Der Build-Prozess kann einige Minuten dauern.<br>
+Ist der Build-Prozess abgeschlossen, befindt sich die Anwendung im Builds-Ornder. <br>
+</P>
+
+<IMG src = "3. Erstellen des Builds_2.png" style='width:100%; height:auto'>
+<br>
+
+<h3> 4. Vervielfältigen und spielen des Spiels </h3>
+<P> 
+<br>
+Der Build-Ordner kann auf jeden Computer mit dem Betriebssystem Windows kopiert werden. Die Anwendung kann dann diesem ausgeführt werden.<br>
+</P>
+
+<h4> 4.1 Mehrere Anwendungen auf einem Gerät </h3>
+<P> 
+<br>
+Auf einem Gerät können mehere Instanzen der selben Anwendungen gestartet werden.<br>
+Dies eignet sich vorallem zum überprüfen ob die Anwengung funktioniert.<br>
+</P>
+
+<IMG src = "Bilder\Skizzen\Anwendungen auf einem Gerät.png" style='width:100%; height:auto'>
+<br>
+
+<h4> 4.2 Mehrere Anwendungen im lokalen Netzwerk </h3>
+<P> 
+<br>
+Es können auch mehrere Instanzen auf mehreren unterschiedlichen Geräten im selben Netzwerk ausgeführt werden.<br>
+Beispielsweise auf einem Laptop und einem Desktop-Computer<br>
+</P>
+
+<IMG src = "Bilder\Skizzen\Komunikation im LokalenNetzwerk.png" style='width:100%; height:auto'>
+<br>
+
+<h4> 4.3 Mehrere Anwendungen in verschiedenen lokalen Netzwerken </h3>
+<P> 
+<br>
+Es können auch mehrere Instanzen auf mehreren unterschiedlichen Geräten in unterschiedlichen Netzwerken ausgeführt werden.<br>
+Die Person aus dem 1. Netzwerk sieht die Geräte im 2. Netzwerk nicht. Sie kann nur mit dem Router kommunizieren.<br>
+Damit die Komunikation hier funktionieren kann muss der Router und die Firewall entsprechend konfiguriert werden.<br>
+
+</P>
+
+<IMG src = "Anwendungen auf einem Gerät.png" style='width:100%; height:auto'>
+<br>
 
 
 

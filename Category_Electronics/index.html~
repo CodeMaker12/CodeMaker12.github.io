@@ -6,18 +6,18 @@
 
 <body>
 
-<h1> Themenbereiche </h1>
+<h1> Elektrotechnik </h1>
 
-<P> Auf dieser Website werden unterschidlich Themenbereiche, mit denen ich mich beruflich und privat befasse erklärt</P>
+<h2> Reparaturen </h2>
+<p> Hier beschreibe ich welche Reparaturen ich zur Zeid durchführe und welche ich bereits abgeschlossen habe. </p>
+<A href='OnlyText/Category_Electronics/Repairs/index.html'> 'Zu den Reperaturen' </A>
 
-<a href="./Category_Electronics">,Elektro Technik </a>
+<P> Hier beschreibe ich wie man bestimmte Schaltungen auslegt, aufbaut und testet. <br>
+Falls möglich werden hierzu Formeln verwendet und es werden LTSpice-Dateien zum Herunterladen bereitgestellt, sodass jeder die Zusammenhänge selber nachvollziehen kann </P>
 
-<!--
-<h2> Elektrotechnik </h2>
-<P> Hier beschreibe ich wie man bestimmte Schaltungen auslegt, aufbaut und testet. </P>
-<P> Falls möglich werden hierzu Formeln verwendet und es werden LTSpice-Dateien zum Herunterladen bereitgestellt, sodass jeder die Zusammenhänge selber nachvollziehen kann </P>
+<h2> Schaltungen </h2>
 
-<h3> Transistorschaltungen </h3> 
+<h2> Transistorschaltungen </h2> 
 <P> Der Bipolartransistor kann in Verstärkerschaltungen verwendet werden. </P>
 <P> Je nachdem wie der Bipolartransistor mit passiven Bauteilen verschaltet wird ergeben sich unterschiedliche Vestärkerschaltungen. </P>
 
@@ -29,8 +29,8 @@
 <P> Bei der Kollektorschaltung liegt der Bezugspunkt am Kollektor. </P>
 <IMG src = "Kollektorschaltung.png" width="476" height="350" >
 
--->
-
 </body>
 
 </html>
+
+<A href='./Category_Informatik/index.html'> <IMG src='SpieleEntwicklungReiter.png' style='width:100%; height:auto' > </A>
